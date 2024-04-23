@@ -1,0 +1,19 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.aronpennings</groupId>
+    <artifactId>Duel of Champions -Java edition</artifactId>
+    <packaging>jar</packaging>
+    <version>0.5-SNAPSHOT</version>
+    <name>Duel of Champions -Java edition</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
