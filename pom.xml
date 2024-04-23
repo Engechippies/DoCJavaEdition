@@ -3,10 +3,13 @@
     <groupId>com.aronpennings</groupId>
     <artifactId>Duel of Champions -Java edition</artifactId>
     <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
+    </properties>
     <version>0.5-SNAPSHOT</version>
     <name>Duel of Champions -Java edition</name>
     <url>http://maven.apache.org</url>
-
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -15,5 +18,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
