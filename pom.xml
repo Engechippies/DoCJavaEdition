@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.aronpennings</groupId>
-    <artifactId>Duel of Champions -Java edition</artifactId>
+    <artifactId>DoCJavaEdition</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
