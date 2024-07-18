@@ -4,8 +4,6 @@ public class Dataseeder {
     UI ui;
     private String playerNaam;
     public Dataseeder() {
-        ui = new UI();
-        playerNaam = ui.startMenu();
     }
     public void application() {
         switch(ui.keuzeMenu()) {
