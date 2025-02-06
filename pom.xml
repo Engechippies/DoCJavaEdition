@@ -2,7 +2,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.aronpennings</groupId>
     <artifactId>DoCJavaEdition</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>DoCGUI</module>
+        <module>DoCCore</module>
+    </modules>
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
@@ -24,37 +28,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>22-ea+16</version>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.48.0.0</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>22-ea+16</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.6.5.Final</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>22-ea+16</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-ant</artifactId>
+            <version>6.6.5.Final</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>22-ea+16</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-media</artifactId>
-            <version>21-ea+24</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>21-ea+24</version>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-community-dialects</artifactId>
+            <version>6.6.5.Final</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
