@@ -1,6 +1,7 @@
 package com.aronpennings.Gui.Controllers;
 
 import com.aronpennings.DuelofChampionsJavaEdition.DBManagement.DBManager;
+import com.aronpennings.DuelofChampionsJavaEdition.Player.Player;
 import com.aronpennings.Gui.Gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 public class GuiStartController {
     public Button exitKnop;
     public TextField modeView;
+    public TextField difficultyView;
 
     @FXML
     private Gui mainApp;
@@ -25,8 +27,9 @@ public class GuiStartController {
     }
 
     public void initialize() {
+        Player player = dbManager.getPlayer(1);
         try {
-            String mode = dbManager.getPlayer(1).getCurrentMode();
+            String mode = player.getCurrentMode();
             if (mode == null) {
                 throw new NullPointerException();
             } else {
@@ -35,6 +38,17 @@ public class GuiStartController {
         }
         catch (NullPointerException nullPointerException) {
             modeView.setText("No mode selected");
+        }
+        try {
+            String difficulty = player.getDifficulty();
+            if (difficulty == null) {
+                throw new NullPointerException();
+            } else {
+                difficultyView.setText(difficulty);
+            }
+        }
+        catch (NullPointerException nullPointerException) {
+            difficultyView.setText("No difficulty selected");
         }
     }
     public void setMainApp(Gui mainApp) {
@@ -48,11 +62,11 @@ public class GuiStartController {
         });
     }
     public void onButtonClick(javafx.event.ActionEvent actionEvent) {
-       // if (dbManager.getPlayer(1).getCurrentMode() != null) {
+        if (dbManager.getPlayer(1).getCurrentMode() != null) {
             mainApp.launchOneVOne(stage);
-        //} else {
-        //    new Alert(Alert.AlertType.ERROR, "Sorry, no game mode is currently selected, go into settings to set a mode").showAndWait();
-        //}
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Sorry, no game mode is currently selected, go into settings to set a mode").showAndWait();
+        }
     }
     public void onSettingsClick(javafx.event.ActionEvent actionEvent) {mainApp.launchSettings(stage);}
 

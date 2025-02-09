@@ -36,6 +36,12 @@ public class DBManager {
         Session session = sessionFactory.openSession();
         return session.get(Player.class, 1).getCurrentMode();
     }
+    public void setCurrentMode(String mode) throws SQLException {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        session.get(Player.class, 1).setCurrentMode(mode);
+        session.getTransaction().commit();
+    }
     public NPC getRandomBot() throws SQLException {return new DBManagerBot().getRandomBot(sessionFactory);}
     public Player getPlayer(int id) {return new DBManagerPlayer().getPlayer(id, sessionFactory);}
     public void ChangeDifficulty(String difficulty) throws SQLException {new DBManagerPlayer().ChangeDifficulty(difficulty, sessionFactory);}

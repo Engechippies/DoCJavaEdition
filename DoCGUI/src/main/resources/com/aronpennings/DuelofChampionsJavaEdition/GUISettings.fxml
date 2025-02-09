@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #6B8E8D;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aronpennings.Gui.Controllers.GuiSettingsController">
    <children>
       <Button fx:id="backToLauncher" layoutX="1142.0" layoutY="636.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="84.0" prefWidth="138.0" style="-fx-background-color: darkred;" text="Back to Launcher" textFill="WHITE">
@@ -19,17 +18,20 @@
       <TextField fx:id="healthInput" layoutX="96.0" layoutY="335.0" />
       <TextField fx:id="critchanceInpuit" layoutX="96.0" layoutY="426.0" />
       <TextField fx:id="naamInput" layoutX="350.0" layoutY="161.0" />
-      <TextField editable="false" layoutX="350.0" layoutY="135.0" style="-fx-background-color: #6B8E8D;" text="Name:" />
-      <TextField editable="false" layoutX="96.0" layoutY="135.0" style="-fx-background-color: #6B8E8D;" text="Damage:" />
+      <TextField editable="false" focusTraversable="false" layoutX="350.0" layoutY="135.0" style="-fx-background-color: #6B8E8D;" text="Name:" />
+      <TextField editable="false" focusTraversable="false" layoutX="96.0" layoutY="135.0" style="-fx-background-color: #6B8E8D;" text="Damage:" />
       <TextField fx:id="cheatInput" layoutX="1131.0" layoutY="2.0" style="-fx-background-color: #6B8E8D;" />
-      <TextField editable="false" layoutX="96.0" layoutY="309.0" style="-fx-background-color: #6B8E8D;" text="Health:" />
-      <TextField editable="false" layoutX="96.0" layoutY="221.0" style="-fx-background-color: #6B8E8D;" text="Speed:" />
-      <TextField editable="false" layoutX="96.0" layoutY="400.0" style="-fx-background-color: #6B8E8D;" text="CritChance:" />
-      <Button layoutX="350.0" layoutY="195.0" mnemonicParsing="false" onAction="#setName" prefHeight="25.0" prefWidth="149.0" text="Change Name" />
-      <Button layoutX="96.0" layoutY="475.0" mnemonicParsing="false" onAction="#setCombatValues" prefHeight="25.0" prefWidth="149.0" text="Change Combat Values" />
-      <ChoiceBox fx:id="difficultyBox" layoutX="350.0" layoutY="283.0" prefWidth="150.0" />
-      <TextField editable="false" layoutX="350.0" layoutY="259.0" style="-fx-background-color: #6B8E8D;" text="Difficulty" />
-      <ChoiceBox fx:id="modeBox" layoutX="350.0" layoutY="360.0" prefWidth="150.0" />
-      <TextField editable="false" layoutX="350.0" layoutY="335.0" style="-fx-background-color: #6B8E8D;" text="Mode" />
+      <TextField editable="false" focusTraversable="false" layoutX="96.0" layoutY="309.0" style="-fx-background-color: #6B8E8D;" text="Health:" />
+      <TextField editable="false" focusTraversable="false" layoutX="96.0" layoutY="221.0" style="-fx-background-color: #6B8E8D;" text="Speed:" />
+      <TextField editable="false" focusTraversable="false" layoutX="96.0" layoutY="400.0" style="-fx-background-color: #6B8E8D;" text="CritChance:" />
+      <ChoiceBox fx:id="difficultyBox" layoutX="349.0" layoutY="233.0" prefWidth="150.0" />
+      <TextField editable="false" focusTraversable="false" layoutX="349.0" layoutY="209.0" style="-fx-background-color: #6B8E8D;" text="Difficulty" />
+      <ChoiceBox fx:id="modeBox" layoutX="349.0" layoutY="310.0" prefWidth="150.0" />
+      <TextField editable="false" focusTraversable="false" layoutX="349.0" layoutY="285.0" style="-fx-background-color: #6B8E8D;" text="Mode" />
+      <TextField editable="false" focusTraversable="false" layoutX="7.0" layoutY="426.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6B8E8D;" text="Max = 5" />
+      <TextField editable="false" focusTraversable="false" layoutX="7.0" layoutY="335.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6B8E8D;" text="Max = 10" />
+      <TextField editable="false" focusTraversable="false" layoutX="14.0" layoutY="161.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6B8E8D;" text="Max = 5" />
+      <TextField editable="false" focusTraversable="false" layoutX="8.0" layoutY="247.0" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #6B8E8D;" text="Max = 5" />
+      <TextField editable="false" focusTraversable="false" layoutX="117.0" layoutY="459.0" prefHeight="25.0" prefWidth="106.0" style="-fx-background-color: #6B8E8D;" text="Max Totaal = 18" />
    </children>
 </AnchorPane>

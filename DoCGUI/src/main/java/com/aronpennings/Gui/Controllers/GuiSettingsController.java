@@ -1,5 +1,6 @@
 package com.aronpennings.Gui.Controllers;
 
+import com.aronpennings.DuelofChampionsJavaEdition.DBManagement.DBManager;
 import com.aronpennings.DuelofChampionsJavaEdition.Modes.Settings;
 import com.aronpennings.DuelofChampionsJavaEdition.Player.Player;
 import com.aronpennings.Gui.Gui;
@@ -55,17 +56,24 @@ public class GuiSettingsController {
         });
         ObservableList<String> observableList2 = FXCollections.observableArrayList(new String[]{"OneVOne", "Tournament"});
         modeBox.setItems(observableList2);
+        modeBox.setValue(player.getCurrentMode());
             modeBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                newValue.toString();
+                try {
+                    settings.setMode(newValue.toString());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             });
     }
     public void setMainApp(Gui mainApp) {
         this.mainApp = mainApp;
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) throws IOException {
+        setCombatValues();
+        setName();
         mainApp.start(stage);
     }
-    public void setCombatValues(javafx.event.ActionEvent actionEvent) {
+    public void setCombatValues() {
         try {
             int damage = Integer.parseInt(damageInput.getText());
             int speed = Integer.parseInt(speedInput.getText());
@@ -81,7 +89,7 @@ public class GuiSettingsController {
             alert.showAndWait();
         }
     }
-    public void setName(javafx.event.ActionEvent actionEvent) throws SQLException {
+    public void setName() {
         try {
             String naam = naamInput.getText();
             if (naam.isEmpty()) {

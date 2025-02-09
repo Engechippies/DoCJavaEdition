@@ -26,6 +26,9 @@ public class Settings{
     public void setDifficulty(String difficulty) throws SQLException {
         dbManager.ChangeDifficulty(difficulty);
     }
+    public void setMode(String mode) throws SQLException {
+        dbManager.setCurrentMode(mode);
+    }
     public void setNaam(String naam) throws SQLException {
         dbManager.ChangeNaam(naam);
     }

@@ -31,6 +31,7 @@ import java.util.function.Consumer;
 
 public class GuiOneVOneController {
     public Button exitKnop;
+    public Button returnToLauncher;
     public TextArea textScreen;
     public Button startButton;
     public Button nothingButton;
@@ -188,6 +189,7 @@ public class GuiOneVOneController {
         return false;
     }
     public void defeat() {
+        DeactivateButton(returnToLauncher);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e -> textScreen.setText("You have Lost...")),
                 new KeyFrame(Duration.seconds(2.5), e -> addTextToScreen("As you lay there, you hear " + npc.getName() + " approaching")),
@@ -205,6 +207,7 @@ public class GuiOneVOneController {
     }
 
     public void victory() {
+        DeactivateButton(returnToLauncher);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), e -> textScreen.setText("You have Won!")),
                 new KeyFrame(Duration.seconds(2.5), e -> addTextToScreen("Before losing conciousness, " + npc.getName() + " mutters")),
