@@ -118,7 +118,7 @@ public class GuiOneVOneController {
     }
     public void attackAction(String keyWord) {
         int damage = match.Attack(player, npc);
-        npc.setHealth(npc.getHealth() - damage); //spel werkt, alleen er moet nog meer tekst bij komen
+        npc.setHealth(npc.getHealth() - damage); //Achievements is een mooie feature om toe te voegen
         if (damage > 0) {
             addTextToScreen(player.getName() + " has done " + damage + " damage");
             if (npc.getHealth() <= 0) {
