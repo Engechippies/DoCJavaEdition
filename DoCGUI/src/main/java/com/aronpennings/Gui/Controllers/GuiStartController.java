@@ -3,13 +3,19 @@ package com.aronpennings.Gui.Controllers;
 import com.aronpennings.DuelofChampionsJavaEdition.DBManagement.DBManager;
 import com.aronpennings.DuelofChampionsJavaEdition.Player.Player;
 import com.aronpennings.Gui.Gui;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public class GuiStartController {
@@ -53,6 +59,18 @@ public class GuiStartController {
     }
     public void setMainApp(Gui mainApp) {
         this.mainApp = mainApp;
+        String audioFile = new File("DoCGUI/src/main/resources/Audio/music.mp3").toURI().toString();
+        Media media = new Media(audioFile);
+        if (this.mainApp.mediaPlayer == null) {
+            this.mainApp.mediaPlayer = new MediaPlayer(media);
+            this.mainApp.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            this.mainApp.mediaPlayer.setVolume(0.1);
+            this.mainApp.mediaPlayer.play();
+        }
+        if (this.mainApp.mediaPlayer.getStatus() == MediaPlayer.Status.STOPPED) {
+            this.mainApp.mediaPlayer.setVolume(0.1);
+            this.mainApp.mediaPlayer.play();
+        }
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) {
         mainApp.leaveConfirmatie.showAndWait().ifPresent(response -> {
@@ -62,13 +80,16 @@ public class GuiStartController {
         });
     }
     public void onButtonClick(javafx.event.ActionEvent actionEvent) {
+        mainApp.mediaPlayer.stop();
         if (dbManager.getPlayer(1).getCurrentMode() != null) {
             mainApp.launchOneVOne(stage);
         } else {
             new Alert(Alert.AlertType.ERROR, "Sorry, no game mode is currently selected, go into settings to set a mode").showAndWait();
         }
     }
-    public void onSettingsClick(javafx.event.ActionEvent actionEvent) {mainApp.launchSettings(stage);}
+    public void onSettingsClick(javafx.event.ActionEvent actionEvent) {
+        mainApp.launchSettings(stage);
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;

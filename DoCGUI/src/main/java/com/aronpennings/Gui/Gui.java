@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 
 public class Gui extends Application {
     public DBManager dbManager;
+    public MediaPlayer mediaPlayer;
     {
         try {
             dbManager = new DBManager();
@@ -92,6 +94,7 @@ public class Gui extends Application {
         guiOneVOneController.setStage(stage);
         stage.show();
     }
+
     public void launchOneVOne(Stage stage) {
         try {
             launchOneVOneScreen(stage);

@@ -55,6 +55,10 @@ public class OneVOne implements IMode{
         return player;
     }
 
+    public Player refreshPlayer() {
+        return dbManager.getPlayer(1);
+    }
+
     @Override
     public void setPlayer(int id) {
 

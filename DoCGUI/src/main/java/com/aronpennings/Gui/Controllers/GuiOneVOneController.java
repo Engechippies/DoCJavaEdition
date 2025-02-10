@@ -16,6 +16,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -38,6 +39,9 @@ public class GuiOneVOneController {
     public Button healButton;
     public Button blockButton;
     public Button attackButton;
+    public Button rematchButton;
+    public Button returnToLauncher1;
+    public AnchorPane background;
 
     @FXML
     private Gui mainApp;
@@ -45,7 +49,9 @@ public class GuiOneVOneController {
     private NPC npc;
     private Player player;
     private OneVOne match;
+    private int botOriginalHealth;
     private final Map<String, Consumer<String>> commands = new HashMap<>();
+    
     private Timeline timelineGameLoop = new Timeline(
             new KeyFrame(Duration.seconds(0), e -> addTextToScreen(npc.getName() + "'s turn:")),
             new KeyFrame(Duration.seconds(1.5), e -> NPCTurn()),
@@ -92,12 +98,12 @@ public class GuiOneVOneController {
         commands.put("block", this::blockAction);
         commands.put("heal", this::healAction);
         commands.put("nothing", this::doNothingAction);
-    }
-    public void initialize() {
         npc = match.getNPC();
         player = match.getPlayer();
+        botOriginalHealth = npc.getHealth();
     }
-    public void startGame(javafx.event.ActionEvent actionEvent) throws InterruptedException {
+
+    public void startGame(javafx.event.ActionEvent actionEvent) {
         DeactivateButton(startButton);
         String startSentence = NPCStrings.NPC_STRINGS.getBeginSentences();
         String startSentenceResponse = NPCStrings.NPC_STRINGS.getBeginSentencesRespone();
@@ -180,7 +186,7 @@ public class GuiOneVOneController {
             }
         } else if (bChoice == 3) {
             npc.setMove(match.Block());
-            addTextToScreen(npc.getName() + " has put up his defenses!");
+            addTextToScreen(npc.getName() + " has put up their defenses!");
         } else {
             int hpAdded = match.Heal();
             npc.setHealth(npc.getHealth() + hpAdded);
@@ -257,8 +263,10 @@ public class GuiOneVOneController {
         this.mainApp = mainApp;
     }
     public void leaveGameNotForButton(ActionEvent e) throws IOException {
-        mainApp.start(stage);
+        ActivateButton(rematchButton, this::rematch);
+        ActivateButton(returnToLauncher1, this::leaveGame);
     }
+
     public void leaveGame(ActionEvent e) {
         mainApp.leaveConfirmatie.showAndWait().ifPresent(response -> {
             if(response == ButtonType.OK) {
@@ -272,5 +280,13 @@ public class GuiOneVOneController {
     }
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    public void rematch(ActionEvent e) {
+        npc.setHealth(botOriginalHealth);
+        player = match.refreshPlayer();
+        textScreen.setText("");
+        DeactivateButton(rematchButton);
+        DeactivateButton(returnToLauncher1);
+        ActivateButton(startButton, this::startGame);
     }
 }
