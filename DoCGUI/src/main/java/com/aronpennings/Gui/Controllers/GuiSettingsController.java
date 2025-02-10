@@ -1,16 +1,13 @@
 package com.aronpennings.Gui.Controllers;
 
-import com.aronpennings.DuelofChampionsJavaEdition.DBManagement.DBManager;
 import com.aronpennings.DuelofChampionsJavaEdition.Modes.Settings;
 import com.aronpennings.DuelofChampionsJavaEdition.Player.Player;
 import com.aronpennings.Gui.Gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +23,7 @@ public class GuiSettingsController {
     public TextField naamInput;
     public ChoiceBox difficultyBox;
     public ChoiceBox modeBox;
+    public Slider audioSlider;
     @FXML
     private Gui mainApp;
     private Stage stage;
@@ -44,6 +42,9 @@ public class GuiSettingsController {
         healthInput.setText(Objects.toString(player.getHealth()));
         critchanceInpuit.setText(Objects.toString(player.getCritchance()));
 
+        audioSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            mainApp.mediaPlayer.setVolume((Double) newValue / 1000);
+        });
         ObservableList<String> observableList = FXCollections.observableArrayList(settings.giveDifficultyInformationToGui());
         difficultyBox.setItems(observableList);
         difficultyBox.setValue(player.getDifficulty());
@@ -67,6 +68,7 @@ public class GuiSettingsController {
     }
     public void setMainApp(Gui mainApp) {
         this.mainApp = mainApp;
+        audioSlider.setValue(mainApp.mediaPlayer.getVolume() * 1000);
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) throws IOException {
         setCombatValues();
