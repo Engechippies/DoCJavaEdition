@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DuelofChampionsJavaEdition" />
-        <module name="DoCGUI" />
-        <module name="DoCCore" />
+        <module name="DoCJavaEdition-Gui" />
+        <module name="DoCJavaEdition-Main" />
+        <module name="DoCJavaEdition-Core" />
       </profile>
     </annotationProcessing>
   </component>

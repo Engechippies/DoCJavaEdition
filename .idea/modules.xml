@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DoCCore.iml" filepath="$PROJECT_DIR$/DoCCore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DoCGUI.iml" filepath="$PROJECT_DIR$/DoCGUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/DoCJavaEdition.iml" filepath="$PROJECT_DIR$/DoCJavaEdition.iml" />
     </modules>
   </component>
