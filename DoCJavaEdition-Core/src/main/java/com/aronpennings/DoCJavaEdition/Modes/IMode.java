@@ -11,8 +11,6 @@ public interface IMode {
 
     public Player player = null;
 
-    public ArrayList<NPC> getNpcs() throws SQLException;
-
     public Player getPlayer();
 
     public void setPlayer(int id);

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -70,11 +71,11 @@ public class GuiSettingsController {
         audioSlider.setValue(mainApp.mediaPlayer.getVolume() * 1000);
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) throws IOException {
-        setCombatValues();
-        setName();
-        mainApp.start(stage);
+        if (setName() && setCombatValues()) {
+            mainApp.start(stage);
+        }
     }
-    public void setCombatValues() {
+    public boolean setCombatValues() {
         try {
             int damage = Integer.parseInt(damageInput.getText());
             int speed = Integer.parseInt(speedInput.getText());
@@ -84,13 +85,15 @@ public class GuiSettingsController {
                 throw new Exception("no numbers > 5(except hp), all numbers added up should be no more than 18");
             }
             settings.setStats(1, damage, speed, hp, critchance);
+            return true;
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Sorry, something went wrong: " + e.getLocalizedMessage());
             System.out.println("Error: " + e);
             alert.showAndWait();
+            return false;
         }
     }
-    public void setName() {
+    public boolean setName() {
         try {
             String naam = naamInput.getText();
             if (naam.isEmpty()) {
@@ -101,10 +104,15 @@ public class GuiSettingsController {
                 throw new Exception("Application exited :)");
             }
             settings.setNaam(naam);
+            return true;
         } catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Sorry, something went wrong: " + e.getLocalizedMessage());
             alert.showAndWait();
+            return false;
         }
+    }
+    public void setVolume(MouseEvent actionEvent) {
+        settings.setVolume(mainApp.mediaPlayer.getVolume());
     }
     public void setStage(Stage stage) {
         this.stage = stage;

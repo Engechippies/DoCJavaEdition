@@ -73,7 +73,7 @@ public class Gui extends Application {
         } else {
             mediaPlayer.setCycleCount(0);
         }
-        mediaPlayer.setVolume(0.1);
+        mediaPlayer.setVolume(dbManager.getPlayer(1).getVolume());
     }
     public void launchScreen(Stage stage) throws IOException{
         URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUI.fxml");

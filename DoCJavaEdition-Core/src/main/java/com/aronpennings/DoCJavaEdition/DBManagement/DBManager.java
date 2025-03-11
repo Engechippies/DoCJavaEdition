@@ -30,7 +30,7 @@ public class DBManager {
                 throw new Exception();
             }
         } catch (Exception e) {
-            Player player = new Player("", 0, 0, 0, 0, "normal", 0, "");
+            Player player = new Player("?", 0, 0, 0, 0, "Normal", 0, "OneVOne", 1);
             session.getTransaction().begin();
             session.persist(player);
             session.getTransaction().commit();
@@ -55,4 +55,5 @@ public class DBManager {
     public void ChangeSpeed(int speed) {new DBManagerPlayer().ChangeSpeed(speed, sessionFactory);}
     public void ChangeHp(int hp) {new DBManagerPlayer().ChangeHp(hp, sessionFactory);}
     public void ChangeCritChance(int critchance) {new DBManagerPlayer().ChangeCritChance(critchance, sessionFactory);}
+    public void ChangeVolume(double volume) {new DBManagerPlayer().ChangeVolume(volume, sessionFactory);}
 }

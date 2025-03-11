@@ -53,4 +53,11 @@ public class DBManagerPlayer {
         player.setCritchance(critChance);
         session.getTransaction().commit();
     }
+    public void ChangeVolume(double volume, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        Player player = session.get(Player.class, 1);
+        player.setVolume(volume);
+        session.getTransaction().commit();
+    }
 }

@@ -21,7 +21,6 @@ public class Tournament implements IMode{
         }
     }
 
-    @Override
     public ArrayList<NPC> getNpcs() {
         return npcs;
     }
@@ -33,6 +32,10 @@ public class Tournament implements IMode{
 
     public String getNaam() {
         return naam;
+    }
+
+    public NPC getSingularNPC(int spotInList) {
+        return npcs.get(spotInList);
     }
 
     public void setNaam(String naam) {

@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -23,13 +24,14 @@ public class GuiStartController {
     private Gui mainApp;
     private Stage stage;
     private DBManager dbManager;
+    private Player player;
 
     public GuiStartController() throws SQLException, ClassNotFoundException {
         dbManager = new DBManager();
     }
 
     public void initialize() {
-        Player player = dbManager.getPlayer(1);
+        player = dbManager.getPlayer(1);
         try {
             String mode = player.getCurrentMode();
             if (mode == null) {
@@ -57,6 +59,7 @@ public class GuiStartController {
         this.mainApp = mainApp;
         if (this.mainApp.mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING || this.mainApp.mediaPlayer.getMedia() != this.mainApp.media.get(0))
             this.mainApp.changeMusic("music", true);
+            this.mainApp.mediaPlayer.setVolume(player.getVolume());
             this.mainApp.mediaPlayer.play();
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) {

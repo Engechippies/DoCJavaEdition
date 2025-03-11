@@ -46,4 +46,7 @@ public class Settings{
             dbManager.ChangeCritChance(critchance);
         }
     }
+    public void setVolume(double volume) {
+        dbManager.ChangeVolume(volume);
+    }
 }

@@ -11,21 +11,20 @@ import java.util.Random;
 
 public class OneVOne implements IMode{
     DBManager dbManager = new DBManager();
-    Player player = dbManager.getPlayer(1);
-    ArrayList<NPC> npcs;
-
+    Player player;
+    NPC npc;
 
     public OneVOne() throws SQLException, ClassNotFoundException {
-        npcs = new ArrayList<>();
-        npcs.add(dbManager.getRandomBot());
+        this.npc = dbManager.getRandomBot();
+        this.player = dbManager.getPlayer(1);
+    }
+    public OneVOne(NPC npc) throws SQLException, ClassNotFoundException {
+        this.npc = npc;
+        this.player = dbManager.getPlayer(1);
     }
 
-    @Override
-    public ArrayList<NPC> getNpcs() {
-        return npcs;
-    }
     public NPC getNPC() {
-        return npcs.getFirst();
+        return npc;
     }
 
     public int Attack(PlayerBehaviour playerToAttack, PlayerBehaviour playerGettingAttacked) {

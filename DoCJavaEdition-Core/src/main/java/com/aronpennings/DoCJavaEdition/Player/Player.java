@@ -26,8 +26,10 @@ public class Player implements PlayerBehaviour {
     int coins;
     @Column(name = "currentMode")
     String currentMode;
+    @Column(name = "volume")
+    double volume;
     String move = null;
-    public Player(String naam, int damage, int speed, int hp, int critchance, String difficulty, int coins, String currentMode) {
+    public Player(String naam, int damage, int speed, int hp, int critchance, String difficulty, int coins, String currentMode, double volume) {
         this.naam = naam;
         this.damage = damage;
         this.speed = speed;
@@ -36,6 +38,7 @@ public class Player implements PlayerBehaviour {
         this.difficulty = difficulty;
         this.coins = coins;
         this.currentMode = currentMode;
+        this.volume = volume;
     }
     public Player() {}
     public int Attack() {
@@ -112,6 +115,14 @@ public class Player implements PlayerBehaviour {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
+    }
+
+    public double getVolume() {
+        return volume;
     }
 
     public String getCurrentMode() {
