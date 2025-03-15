@@ -11,9 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.media.MediaPlayer;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class GuiStartController {
     public Button exitKnop;
@@ -57,10 +57,11 @@ public class GuiStartController {
     }
     public void setMainApp(Gui mainApp) throws IOException {
         this.mainApp = mainApp;
-        if (this.mainApp.mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING || this.mainApp.mediaPlayer.getMedia() != this.mainApp.media.get(0))
+        if (this.mainApp.mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING || this.mainApp.mediaPlayer.getMedia() != this.mainApp.media.get(0)) {
             this.mainApp.changeMusic("music", true);
             this.mainApp.mediaPlayer.setVolume(player.getVolume());
             this.mainApp.mediaPlayer.play();
+        }
     }
     public void leaveGame(javafx.event.ActionEvent actionEvent) {
         mainApp.leaveConfirmatie.showAndWait().ifPresent(response -> {
@@ -69,16 +70,21 @@ public class GuiStartController {
             }
         });
     }
-    public void onButtonClick(javafx.event.ActionEvent actionEvent) {
-        mainApp.mediaPlayer.stop();
-        if (dbManager.getPlayer(1).getCurrentMode() != null) {
-            mainApp.launchOneVOne(stage);
+    public void onButtonClick(javafx.event.ActionEvent actionEvent) throws IOException {
+        if (Objects.equals(dbManager.getPlayer(1).getCurrentMode(), "OneVOne")) {
+            stage = mainApp.getOneVOneController(stage);
+            stage.show();
+            mainApp.mediaPlayer.stop();
+        } else if (Objects.equals(dbManager.getPlayer(1).getCurrentMode(), "Tournament")) {
+            stage = mainApp.getTournament(stage);
+            stage.show();
         } else {
             new Alert(Alert.AlertType.ERROR, "Sorry, no game mode is currently selected, go into settings to set a mode").showAndWait();
         }
     }
-    public void onSettingsClick(javafx.event.ActionEvent actionEvent) {
-        mainApp.launchSettings(stage);
+    public void onSettingsClick(javafx.event.ActionEvent actionEvent) throws IOException {
+        stage = mainApp.getSettingsScreen(stage);
+        stage.show();
     }
 
     public void setStage(Stage stage) {

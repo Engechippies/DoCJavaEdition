@@ -16,6 +16,7 @@ public class Tournament implements IMode{
     public Tournament(int aantalBots, Player player, String naam) throws SQLException, ClassNotFoundException {
         this.naam = naam;
         this.player = player;
+        npcs = new ArrayList<>();
         for (int i = 0; i <= aantalBots; i++) {
             npcs.add(dbManager.getRandomBot());
         }

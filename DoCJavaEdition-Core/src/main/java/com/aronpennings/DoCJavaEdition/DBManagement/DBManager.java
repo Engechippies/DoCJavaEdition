@@ -30,7 +30,7 @@ public class DBManager {
                 throw new Exception();
             }
         } catch (Exception e) {
-            Player player = new Player("?", 0, 0, 0, 0, "Normal", 0, "OneVOne", 1);
+            Player player = new Player("?", 0, 0, 0, 0, "Normal", 0, "OneVOne", 0.1);
             session.getTransaction().begin();
             session.persist(player);
             session.getTransaction().commit();

@@ -45,6 +45,7 @@ public class GuiOneVOneController {
     private Player player;
     private OneVOne match;
     private int botOriginalHealth;
+    private boolean isForTournament;
     private final Map<String, Consumer<String>> commands = new HashMap<>();
     
     private Timeline timelineGameLoop = new Timeline(
@@ -115,6 +116,7 @@ public class GuiOneVOneController {
         npc = match.getNPC();
         player = match.getPlayer();
         botOriginalHealth = npc.getHealth();
+        isForTournament = false;
     }
 
     public void startGame(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -279,6 +281,15 @@ public class GuiOneVOneController {
         button.setOnAction(null);
         button.setCursor(Cursor.cursor("Default"));
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public OneVOne getMatch() {
+        return match;
+    }
+
     public void setMainApp(Gui mainApp) {
         this.mainApp = mainApp;
         try {
@@ -289,7 +300,9 @@ public class GuiOneVOneController {
         this.mainApp.mediaPlayer.play();
     }
     public void leaveGameNotForButton(ActionEvent e) throws IOException {
-        ActivateButton(rematchButton, this::rematch);
+        if (!isForTournament) {
+            ActivateButton(rematchButton, this::rematch);
+        }
         ActivateButton(returnToLauncher1, this::leaveGame);
     }
 
@@ -297,13 +310,23 @@ public class GuiOneVOneController {
         mainApp.leaveConfirmatie.showAndWait().ifPresent(response -> {
             if(response == ButtonType.OK) {
                 try {
-                    mainApp.start(stage);
+                    if (isForTournament) {
+                        stage.close();
+                    } else {
+                        mainApp.start(stage);
+                    }
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
     }
+
+    public void changeNpcForTournament(NPC npc) {
+        this.npc = npc;
+        isForTournament = true;
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }

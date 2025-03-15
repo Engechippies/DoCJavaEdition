@@ -1,9 +1,11 @@
 package com.aronpennings.DoCJavaEdition;
 
+import com.aronpennings.DoCJavaEdition.Controllers.GuiTournamentController;
 import com.aronpennings.DoCJavaEdition.DBManagement.DBManager;
 import com.aronpennings.DoCJavaEdition.Controllers.GuiOneVOneController;
 import com.aronpennings.DoCJavaEdition.Controllers.GuiSettingsController;
 import com.aronpennings.DoCJavaEdition.Controllers.GuiStartController;
+import com.aronpennings.DoCJavaEdition.Player.NPC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -51,7 +53,8 @@ public class Gui extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException{
-        launchScreen(stage);
+        stage = getlaunchScreen(stage);
+        stage.show();
     }
     public void changeMusic(String audioNaam, Boolean isLooped) throws IOException {
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
@@ -75,7 +78,7 @@ public class Gui extends Application {
         }
         mediaPlayer.setVolume(dbManager.getPlayer(1).getVolume());
     }
-    public void launchScreen(Stage stage) throws IOException{
+    public Stage getlaunchScreen(Stage stage) throws IOException{
         URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUI.fxml");
         if (fxmlUrl == null) {
             throw new IOException("FXML file not found");
@@ -90,11 +93,11 @@ public class Gui extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Duel Of Champions Launcher");
+        stage.setTitle("DoC Launcher");
         guiStartController.setStage(stage);
-        stage.show();
+        return stage;
     }
-    public void launchSettingsScreen(Stage stage) throws IOException{
+    public Stage getSettingsScreen(Stage stage) throws IOException{
         URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUISettings.fxml");
         if (fxmlUrl == null) {
             throw new IOException("FXML file not found");
@@ -109,11 +112,11 @@ public class Gui extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Duel Of Champions Settings");
+        stage.setTitle("DoC Settings");
         guiSettingsController.setStage(stage);
-        stage.show();
+        return stage;
     }
-    public void launchOneVOneScreen(Stage stage) throws IOException {
+    public GuiOneVOneController getOneVOneController(Stage stage, NPC npc) throws IOException {
         URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUIOneVOne.fxml");
         if (fxmlUrl == null) {
             throw new IOException("FXML file not found");
@@ -125,27 +128,40 @@ public class Gui extends Application {
         GuiOneVOneController guiOneVOneController = loader.getController();
         guiOneVOneController.setMainApp(this);
 
+        if (npc != null) {
+            guiOneVOneController.changeNpcForTournament(npc);
+        }
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Duel Of Champions");
         guiOneVOneController.setStage(stage);
-        stage.show();
+        return guiOneVOneController;
     }
 
-    public void launchOneVOne(Stage stage) {
-        try {
-            launchOneVOneScreen(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Stage getOneVOneController(Stage stage) throws IOException {
+        return getOneVOneController(stage, null).getStage();
     }
-    public void launchSettings(Stage stage) {
-        try {
-            launchSettingsScreen(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    public Stage getTournament(Stage stage) throws IOException {
+        URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUITournament.fxml");
+        if (fxmlUrl == null) {
+            throw new IOException("FXML file not found");
         }
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        AnchorPane root = loader.load();
+
+        // Set controller
+        GuiTournamentController guiTournamentController = loader.getController();
+        guiTournamentController.setMainApp(this);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("DoC Tournament Selection");
+        guiTournamentController.setStage(stage);
+        return stage;
     }
 }
 

@@ -14,7 +14,7 @@ public class TournamentDB {
     private Boolean didPlayerWin;
     @Column(name = "nameUserWon")
     private String nameUserWon;
-    @Column(name = "Difficulty")
+    @Column(name = "difficulty")
     private String difficulty;
 
     public TournamentDB(String tournamentName, Boolean didPlayerWin, String nameUserWon, String difficulty) {
@@ -40,8 +40,16 @@ public class TournamentDB {
         return nameUserWon;
     }
 
+    public void setNameUserWon(String nameUserWon) {
+        this.nameUserWon = nameUserWon;
+    }
+
     public Boolean getDidPlayerWin() {
         return didPlayerWin;
+    }
+
+    public void setDidPlayerWin(Boolean didPlayerWin) {
+        this.didPlayerWin = didPlayerWin;
     }
 
     public String getDifficulty() {

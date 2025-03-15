@@ -18,13 +18,13 @@ public class OneVOne implements IMode{
         this.npc = dbManager.getRandomBot();
         this.player = dbManager.getPlayer(1);
     }
-    public OneVOne(NPC npc) throws SQLException, ClassNotFoundException {
-        this.npc = npc;
-        this.player = dbManager.getPlayer(1);
-    }
 
     public NPC getNPC() {
         return npc;
+    }
+
+    public void setNpc(NPC npc) {
+        this.npc = npc;
     }
 
     public int Attack(PlayerBehaviour playerToAttack, PlayerBehaviour playerGettingAttacked) {
