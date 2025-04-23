@@ -12,5 +12,9 @@
         <module name="DoCJavaEdition-Core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DoCCore" target="22" />
+      <module name="DoCGUI" target="22" />
+    </bytecodeTargetLevel>
   </component>
 </project>

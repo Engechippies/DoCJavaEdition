@@ -37,16 +37,21 @@ public class Gui extends Application {
     public Alert leaveConfirmatie = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to leave?");
     public Gui() {
         media = new ArrayList<>();
-        media.add(new Media(getClass().getResource("/Audio/music.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/beforestart.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/Combat.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/lost.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/victory.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/death.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/playerlowhealth.mp3").toExternalForm()));
-        media.add(new Media(getClass().getResource("/Audio/botlowhealth.mp3").toExternalForm()));
-        mediaPlayer = new MediaPlayer(media.get(0));
-        mediaPlayer.setVolume(0.1);
+        try {
+            media.add(new Media(getClass().getResource("/Audio/music.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/beforestart.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/Combat.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/lost.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/victory.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/death.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/playerlowhealth.mp3").toExternalForm()));
+            media.add(new Media(getClass().getResource("/Audio/botlowhealth.mp3").toExternalForm()));
+            mediaPlayer = new MediaPlayer(media.get(0));
+            mediaPlayer.setVolume(0.1);
+        } catch (Exception e) {
+            System.err.println("Failed to initialize media player: " + e.getMessage());
+            mediaPlayer = null;
+        }
     }
     public static void main(String[] args) {
         launch(args);
@@ -57,6 +62,10 @@ public class Gui extends Application {
         stage.show();
     }
     public void changeMusic(String audioNaam, Boolean isLooped) throws IOException {
+        if (mediaPlayer == null) {
+            System.err.println("MediaPlayer is not initialized");
+            return;
+        }
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();
         }
@@ -77,6 +86,15 @@ public class Gui extends Application {
             mediaPlayer.setCycleCount(0);
         }
         mediaPlayer.setVolume(dbManager.getPlayer(1).getVolume());
+    }
+    public boolean playerIsWorking() {
+        return mediaPlayer != null;
+    }
+    public boolean playerIsEmptyAndWorking() {
+        if (!playerIsWorking()) {
+            return false;
+        }
+        return mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING || mediaPlayer.getMedia() != media.get(0);
     }
     public Stage getlaunchScreen(Stage stage) throws IOException{
         URL fxmlUrl = getClass().getResource("/com/aronpennings/DuelofChampionsJavaEdition/GUI.fxml");
